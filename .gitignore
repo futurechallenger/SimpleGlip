@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# Locks
+yarn.lock
+
 # Dependency directory
 node_modules
 
@@ -10,3 +13,6 @@ node_modules
 api.json
 release
 build
+
+# VSCode
+.vscode

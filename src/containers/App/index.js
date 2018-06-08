@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, } from 'react-router';
 
 import PhoneProvider from 'ringcentral-widgets/lib/PhoneProvider';
-
 import AlertContainer from 'ringcentral-widgets/containers/AlertContainer';
 import ContactsPage from 'ringcentral-widgets/containers/ContactsPage';
-
 import getAlertRenderer from '../../components/AlertRenderer';
-
 import MainView from '../MainView';
 import AppView from '../AppView';
 import MobileView from '../MobileView';
@@ -202,4 +199,5 @@ export default function App({
 App.propTypes = {
   phone: PropTypes.object.isRequired,
   hostingUrl: PropTypes.string.isRequired,
+  mobile: PropTypes.bool.isRequired,
 };

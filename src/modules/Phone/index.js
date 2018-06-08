@@ -1,3 +1,5 @@
+// @flow
+
 import 'whatwg-fetch';
 import SDK from 'ringcentral';
 import RingCentralClient from 'ringcentral-client';

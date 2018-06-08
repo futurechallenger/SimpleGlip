@@ -108,6 +108,7 @@ export default class GlipContacts extends RcModule {
     return this.state.status;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   get sourceName() {
     return 'Glip';
   }
