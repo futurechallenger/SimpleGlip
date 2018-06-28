@@ -29,7 +29,7 @@ const config = {
     contentBase: buildPath,
     hot: true,
     inline: true,
-    port: 8080,
+    port: 8060,
   },
   devtool: 'eval-source-map',
   output: {
@@ -44,7 +44,7 @@ const config = {
         NODE_ENV: JSON.stringify('development'),
         API_CONFIG: JSON.stringify(apiConfig),
         APP_VERSION: JSON.stringify(version),
-        HOSTING_URL: JSON.stringify('http://localhost:8080'),
+        HOSTING_URL: JSON.stringify('http://localhost:8060'),
       },
     }),
   ],

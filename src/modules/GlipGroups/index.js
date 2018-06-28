@@ -1,9 +1,9 @@
-import GlipGroups from 'ringcentral-integration/modules/GlipGroups';
-import { Module } from 'ringcentral-integration/lib/di';
+import GlipGroups from "ringcentral-integration/modules/GlipGroups";
+import { Module } from "ringcentral-integration/lib/di";
 
 import getReducer, {
-  getCurrentGroupIdReducer,
-} from 'ringcentral-integration/modules/GlipGroups/getReducer';
+  getCurrentGroupIdReducer
+} from "ringcentral-integration/modules/GlipGroups/getReducer";
 
 @Module({
   deps: []
@@ -25,10 +25,18 @@ export default class NewGlipGroups extends GlipGroups {
     if (this._glipPersons) {
       this._glipPersons.loadPersons(this.groupMemberIds);
     }
-    if (!this.currentGroupId && this.currentGroupIdFromStorage && !this._mobile) {
+    if (
+      !this.currentGroupId &&
+      this.currentGroupIdFromStorage &&
+      !this._mobile
+    ) {
       this.updateCurrentGroupId(this.currentGroupIdFromStorage);
     }
-    if (!this.currentGroupId && !this.currentGroupIdFromStorage && !this._mobile) {
+    if (
+      !this.currentGroupId &&
+      !this.currentGroupIdFromStorage &&
+      !this._mobile
+    ) {
       this.updateCurrentGroupId(this.groups[0] && this.groups[0].id);
     }
     if (this._preloadPosts) {
@@ -46,13 +54,16 @@ export default class NewGlipGroups extends GlipGroups {
   }
 
   async createTeam(name, members) {
-    const group = await this._client.glip().groups().post({
-      type: 'Team',
-      name,
-      members,
-      isPublic: true,
-      description: ''
-    });
+    const group = await this._client
+      .glip()
+      .groups()
+      .post({
+        type: "Team",
+        name,
+        members,
+        isPublic: true,
+        description: ""
+      });
     return group.id;
   }
 }

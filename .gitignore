@@ -14,5 +14,8 @@ api.json
 release
 build
 
-# VSCode
+# IDE
+.idea
 .vscode
+
+.yarn.lock

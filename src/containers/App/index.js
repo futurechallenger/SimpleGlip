@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router, Route, } from 'react-router';
+import { Router, Route } from 'react-router';
 
 import PhoneProvider from 'ringcentral-widgets/lib/PhoneProvider';
 import AlertContainer from 'ringcentral-widgets/containers/AlertContainer';
@@ -19,21 +19,15 @@ import GlipContactDetail from '../GlipContactDetail';
 import GlipSettings from '../GlipSettings';
 import WelcomePage from '../WelcomePage';
 
-export default function App({
-  phone,
-  hostingUrl,
-  mobile,
-}) {
+export default function App({ phone, hostingUrl, mobile }) {
   if (mobile) {
     return (
       <PhoneProvider phone={phone}>
-        <Provider store={phone.store} >
-          <Router history={phone.routerInteraction.history} >
+        <Provider store={phone.store}>
+          <Router history={phone.routerInteraction.history}>
             <Route
               component={routerProps => (
-                <AppView
-                  hostingUrl={hostingUrl}
-                >
+                <AppView hostingUrl={hostingUrl}>
                   {routerProps.children}
                   <AlertContainer
                     callingSettingsUrl="/settings/calling"
@@ -41,57 +35,43 @@ export default function App({
                     getAdditionalRenderer={getAlertRenderer}
                   />
                 </AppView>
-              )} >
-              <Route
-                path="/"
-                component={WelcomePage}
-              />
+              )}
+            >
+              <Route path="/" component={WelcomePage} />
               <Route
                 path="/"
                 component={routerProps => (
-                  <MobileView>
-                    {routerProps.children}
-                  </MobileView>
+                  <MobileView>{routerProps.children}</MobileView>
                 )}
               >
                 <Route
                   path="/glip"
                   component={() => <GlipGroups mobile={mobile} />}
                 />
-                <Route
-                  path="/contacts"
-                  component={ContactsPage}
-                />
-                <Route
-                  path="/settings"
-                  component={GlipSettings}
-                />
+                <Route path="/contacts" component={ContactsPage} />
+                <Route path="/settings" component={GlipSettings} />
               </Route>
               <Route
                 path="/glip/persons/:personId"
-                component={
-                  routerProps => (
-                    <GlipPersonProfile
-                      params={routerProps.params}
-                      onBackClick={() => {
-                        phone.routerInteraction.push('/glip');
-                      }}
-                    />
-                  )
-                }
+                component={routerProps => (
+                  <GlipPersonProfile
+                    params={routerProps.params}
+                    onBackClick={() => {
+                      phone.routerInteraction.push('/glip');
+                    }}
+                  />
+                )}
               />
               <Route
                 path="/glip/groups/:groupId"
-                component={
-                  routerProps => (
-                    <GlipChat
-                      params={routerProps.params}
-                      onBackClick={() => {
-                        phone.routerInteraction.push('/glip');
-                      }}
-                    />
-                  )
-                }
+                component={routerProps => (
+                  <GlipChat
+                    params={routerProps.params}
+                    onBackClick={() => {
+                      phone.routerInteraction.push('/glip');
+                    }}
+                  />
+                )}
               />
               <Route
                 path="/contacts/:contactType/:contactId"
@@ -112,13 +92,11 @@ export default function App({
   }
   return (
     <PhoneProvider phone={phone}>
-      <Provider store={phone.store} >
-        <Router history={phone.routerInteraction.history} >
+      <Provider store={phone.store}>
+        <Router history={phone.routerInteraction.history}>
           <Route
             component={routerProps => (
-              <AppView
-                hostingUrl={hostingUrl}
-              >
+              <AppView hostingUrl={hostingUrl}>
                 {routerProps.children}
                 <AlertContainer
                   callingSettingsUrl="/settings/calling"
@@ -126,53 +104,40 @@ export default function App({
                   getAdditionalRenderer={getAlertRenderer}
                 />
               </AppView>
-            )} >
-            <Route
-              path="/"
-              component={WelcomePage}
-            />
+            )}
+          >
+            <Route path="/" component={WelcomePage} />
             <Route
               path="/"
               component={routerProps => (
-                <MainView>
-                  {routerProps.children}
-                </MainView>
+                <MainView>{routerProps.children}</MainView>
               )}
             >
               <Route
                 path="/glip"
                 component={routerProps => (
-                  <SideView
-                    side={<GlipGroups />}
-                  >
+                  <SideView side={<GlipGroups />}>
                     {routerProps.children}
                   </SideView>
-                )} >
+                )}
+              >
                 <Route
                   path="persons/:personId"
-                  component={
-                    routerProps => (
-                      <GlipPersonProfile params={routerProps.params} />
-                    )
-                  }
+                  component={routerProps => (
+                    <GlipPersonProfile params={routerProps.params} />
+                  )}
                 />
                 <Route
                   path="groups/:groupId"
-                  component={
-                    routerProps => (
-                      <GlipChat params={routerProps.params} />
-                    )
-                  }
+                  component={routerProps => (
+                    <GlipChat params={routerProps.params} />
+                  )}
                 />
               </Route>
               <Route
                 path="/contacts"
                 component={routerProps => (
-                  <SideView
-                    side={
-                      <ContactsPage />
-                    }
-                  >
+                  <SideView side={<ContactsPage />}>
                     {routerProps.children}
                   </SideView>
                 )}
@@ -184,10 +149,7 @@ export default function App({
                   )}
                 />
               </Route>
-              <Route
-                path="/settings"
-                component={GlipSettings}
-              />
+              <Route path="/settings" component={GlipSettings} />
             </Route>
           </Route>
         </Router>
@@ -199,5 +161,5 @@ export default function App({
 App.propTypes = {
   phone: PropTypes.object.isRequired,
   hostingUrl: PropTypes.string.isRequired,
-  mobile: PropTypes.bool.isRequired,
+  mobile: PropTypes.bool.isRequired
 };
