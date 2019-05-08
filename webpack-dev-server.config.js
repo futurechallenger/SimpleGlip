@@ -29,6 +29,7 @@ const config = {
     contentBase: buildPath,
     hot: true,
     inline: true,
+    host: '0.0.0.0',
     port: 8060,
   },
   devtool: 'eval-source-map',
@@ -97,7 +98,7 @@ const config = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: function () {
+              plugins() {
                 return [
                   autoprefixer
                 ];
